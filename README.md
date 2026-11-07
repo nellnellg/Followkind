@@ -43,3 +43,29 @@ The database functions were exercised in a local PostgreSQL-compatible test inst
 [GitHub](https://github.com/nellnellg/Followkind)
 
 [Figma](https://www.figma.com/design/UtGNXPeN6W0hLrK2isu3Hq/Untitled)
+
+## Deploy on your own Cloudflare account
+
+Connect this GitHub repository to a Cloudflare Worker with these settings:
+
+| Setting | Value |
+| --- | --- |
+| Worker name | `followkind` |
+| Production branch | `main` |
+| Root directory | `app` |
+| Build command | `npm run build` |
+| Deploy command | `npm run deploy` |
+| Node version | `22` or newer |
+
+The build generates the Worker and asset configuration in `dist/server/wrangler.json`.
+The deploy command uses that generated configuration. No ChatGPT account is
+required to access a standalone Cloudflare deployment. Staff records still
+require Supabase sign-in and approved membership.
+
+After deployment, add the exact `https://...workers.dev` URL to Supabase
+Authentication > URL Configuration > Redirect URLs, and update Site URL to
+that origin if it is now your primary app. Personal volunteer links are built
+from the origin where the coordinator creates them.
+
+Keep the worker name `followkind`, matching the generated configuration. This
+version needs no new Cloudflare secrets because the client uses a publishable key.
